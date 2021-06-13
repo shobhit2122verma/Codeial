@@ -5,6 +5,9 @@ const expressLayouts=require('express-ejs-layouts');
 
 //now we have to tell our app to use it so we will do it before routes because in the routes those views are going to be rendered
 app.use(expressLayouts);
+//extract styles and scripts from subpages into the layout
+app.set('layout extractStyles',true);//after this we will add the ejs script in the layout ejs so that our styles and link are in right position
+app.set('layout extractScripts',true)
 
 app.use(express.static('./assets'));
 
