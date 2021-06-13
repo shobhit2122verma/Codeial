@@ -2,6 +2,8 @@ const express=require('express');//1
 const app=express();//2
 const port=8000;//3
 const expressLayouts=require('express-ejs-layouts');
+const db=require('./config/mongoose');
+
 
 //now we have to tell our app to use it so we will do it before routes because in the routes those views are going to be rendered
 app.use(expressLayouts);
