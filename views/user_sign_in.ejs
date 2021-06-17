@@ -1,1 +1,7 @@
 <h1>User Sign In</h1>
+<!-- whenever a user login then it is considered as a session -->
+<form action="/users/create-session" method="POST">
+    <input type="email" name="email" placeholder="Your email" required>
+    <input type="password" name="password" placeholder="Password" required>
+    <input type="submit" value="Sign In">
+</form>
