@@ -1,7 +1,30 @@
 const User=require('../models/user');//now we have the user model that we need to get info from the user database
 
 module.exports.profile=function(req,res){
-    res.render('user_profile',{title:"codeial"});
+    //now what we will do is that we check if there is already a signed in user there in cookies or not
+    //if not then we will be taken back to the sign in page
+    if(req.cookies.user_id){
+        User.findById(req.cookies.user_id,function(err,user){
+            if(err){
+                console.log('user not found');
+                return;
+            }
+            if(user){
+                return res.render('user_profile',{
+                    title:"User profile",
+                    user:user
+                });
+            }
+            else
+            {
+                return res.redirect('user/sign-in');
+            }
+        });
+    }
+    else{
+        return res.redirect('/users/sign-in');
+    }
+    // res.render('user_profile',{title:"codeial"});
 };
 
 module.exports.posts=function(req,res){
@@ -46,5 +69,37 @@ module.exports.create=function(req,res){
 };
 
 module.exports.createSession=function(req,res){
-    //TO DO
+    //steps to authenticate 
+    // find the user
+    User.findOne({email:req.body.email},function(err,user){
+        if(err){
+            console.log("error finding the user");
+            return;
+        }
+        // handle user found
+
+        if(user){
+            //handle password which don't match
+            if(user.password!=req.body.password){
+                return res.redirect('back');
+            }
+
+            //handle session creation
+            res.cookie('user_id',user.id);
+            return res.redirect('/users/profile');
+        }
+        else
+        {
+            //handle user not found
+            return Response.redirect('back');
+        }
+    });
+};
+
+module.exports.deleteSession=function(res,req){
+    // req.cookies('user_id',);
+    if(req.cookies.user_id){
+        res.clearCookie.user_id;
+        return res.redirect('/users/sign-in');
+    }
 };

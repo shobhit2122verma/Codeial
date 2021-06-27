@@ -8,6 +8,8 @@ router.get('/posts',userscontroller.posts);
 router.get('/sign-up',userscontroller.signUp);
 router.get('/sign-in',userscontroller.signIn);
 router.post('/create',userscontroller.create);
+router.post('/create-session',userscontroller.createSession);
+router.post('/delete-session',userscontroller.deleteSession);
 //either we can make the posts controller under the users controller or we can create another another controller for posts and then we can
 //require it over here and then make a get request by the router
 module.exports=router;
