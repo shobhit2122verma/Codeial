@@ -4,7 +4,11 @@ const app=express();//2
 const port=8000;//3
 const expressLayouts=require('express-ejs-layouts');
 const db=require('./config/mongoose');
-const { urlencoded } = require('express');
+
+//used for session cookie after this we work on our middleware
+const session=require('express-session');
+const passport=require('passport');
+const passportLocal=require('./config/passport-local-strategy');
 
 //one thing we missed is that we forgot to read through the post request
 app.use(express.urlencoded());
@@ -19,12 +23,28 @@ app.set('layout extractScripts',true)
 
 app.use(express.static('./assets'));
 
+
 //setting up the view engine 
 app.set('view engine','ejs');
 app.set('views','./views');
-//use express router
-app.use('/',require('./routes'))
 
+app.use(session({
+    name:'Codeial',
+    //TODO change the Secret before deployment in production mode
+    secret:'blahsomething',
+    saveUninitialized:false,
+    resave:false,
+    cookie:{
+        maxAge:(1000 * 60 * 100)   //this is the timelimit of the session till which it is active after this the session is expired
+    }
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());//after doing this we go to the users controller
+
+
+//use express router
+app.use('/',require('./routes'));
 
 app.listen(port,function(err){
     if(err)
@@ -34,3 +54,7 @@ app.listen(port,function(err){
     }
     console.log(`server is running on port:${port}`);
 });//4
+
+
+
+//remember the sequence in which we are adding the middleware and other things

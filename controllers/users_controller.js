@@ -46,5 +46,5 @@ module.exports.create=function(req,res){
 };
 
 module.exports.createSession=function(req,res){
-    //TO DO
+    return res.redirect('/');
 };
