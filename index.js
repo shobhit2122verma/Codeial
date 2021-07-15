@@ -9,6 +9,10 @@ const db=require('./config/mongoose');
 const session=require('express-session');
 const passport=require('passport');
 const passportLocal=require('./config/passport-local-strategy');
+const MongoStore=require('connect-mongodb-session')(session);
+//this is the library that we are using to store the session in the database,unlike other library this requires a argument i.e. the session which we want to store in it
+
+
 
 //one thing we missed is that we forgot to read through the post request
 app.use(express.urlencoded());
@@ -28,6 +32,8 @@ app.use(express.static('./assets'));
 app.set('view engine','ejs');
 app.set('views','./views');
 
+
+//mongo store is used to store the session cookie in the db
 app.use(session({
     name:'Codeial',
     //TODO change the Secret before deployment in production mode
@@ -36,12 +42,19 @@ app.use(session({
     resave:false,
     cookie:{
         maxAge:(1000 * 60 * 100)   //this is the timelimit of the session till which it is active after this the session is expired
-    }
+    },
+    store:new MongoStore({
+            mongooseConnection:db,
+            autoRemove:'disabled'
+    },function(err){
+        console.log(err || 'connect-mongodb setup ok');
+    })
 }));
 
 app.use(passport.initialize());
 app.use(passport.session());//after doing this we go to the users controller
 
+app.use(passport.setAuthenticatedUser);
 
 //use express router
 app.use('/',require('./routes'));

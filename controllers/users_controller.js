@@ -1,3 +1,4 @@
+const passport = require('passport');
 const User=require('../models/user');//now we have the user model that we need to get info from the user database
 
 module.exports.profile=function(req,res){
@@ -10,12 +11,20 @@ module.exports.posts=function(req,res){
 
 //render the signIn page
 module.exports.signIn=function(req,res){
-    res.render('user_sign_in',{title:"Codeial | Sign In"});
+    if(req.isAuthenticated())
+    {
+        return res.redirect('/users/profile');
+    }
+    return res.render('user_sign_in',{title:"Codeial | Sign In"});
 };
 
 
 //render the signUp page
 module.exports.signUp=function(req,res){
+    if(req.isAuthenticated())
+    {
+        return res.redirect('/users/profile');
+    }
     res.render('user_sign_up',{title:"Codeial | Sign Up"});
 };
 
@@ -48,3 +57,8 @@ module.exports.create=function(req,res){
 module.exports.createSession=function(req,res){
     return res.redirect('/');
 };
+
+module.exports.destroySession=function(req,res){
+    req.logout();//this is the function given by passport itself
+    res.redirect('/');
+}
