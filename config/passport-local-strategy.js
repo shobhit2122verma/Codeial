@@ -27,6 +27,7 @@ passport.use(new LocalStrategy({
 
 //serializing the user to decide which key is kept in the cookies
 //this basically means pushing which data of the user we want to store in the cookie now this is just like res.cookie('user_id','user.id');
+//picks out the data from the user that needs to be put in the session cookie
 passport.serializeUser(function(user,done){
     done(null,user.id);
 });
@@ -34,6 +35,7 @@ passport.serializeUser(function(user,done){
 
 //now deserialing will work when browser send the request the browser sents back the user id
 //deserializing the user from the key in the cookies
+//picking out the id of the user from the session cookie and then finding it in the database
 passport.deserializeUser(function(id,done){
     User.findById(id,function(err,user){
         if(err){

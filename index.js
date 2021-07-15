@@ -43,6 +43,7 @@ app.use(session({
     cookie:{
         maxAge:(1000 * 60 * 100)   //this is the timelimit of the session till which it is active after this the session is expired
     },
+    //store is used to store the session info in the database even if the server restarts
     store:new MongoStore({
             mongooseConnection:db,
             autoRemove:'disabled'
