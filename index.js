@@ -13,6 +13,18 @@ const MongoStore=require('connect-mongodb-session')(session);
 //this is the library that we are using to store the session in the database,unlike other library this requires a argument i.e. the session which we want to store in it
 
 
+const sassMiddleware=require('node-sass-middleware');
+//putting up settings for the sass
+//now one thing that has to be noticed here after starting the server that this done not compiled when we are starting the server
+//what happens is when we load the page the compilation starts at that time which is slower ,but it does not matter as this is a development server
+//when we are working on the production level then we have to send all the files before hand
+app.use(sassMiddleware({
+    src:'./assets/scss',//this is where we give the source in which we want our scss files to get converted to css
+    dest:'./assets/css',//this is where we want to keep our css files
+    debug:true,//this is what the info that we see when the server is running so this will show the errors which we want to show 
+    outputStyle:'extended',//this tells that we want everything to be in a single or multiple lines write now we are using extended for this
+    prefix:'/css'//this is where our server should look out for the css files by default 
+}));
 
 //one thing we missed is that we forgot to read through the post request
 app.use(express.urlencoded());
