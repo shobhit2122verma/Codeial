@@ -1,0 +1,23 @@
+#header-layout {
+  position: relative; }
+  #header-layout nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 10px;
+    background-color: #1b4492;
+    color: white;
+    box-shadow: 1px 1px 1px 1px lightgray; }
+    #header-layout nav .mini-logo p {
+      font-size: 1.4rem;
+      font-weight: bold;
+      margin: 20px; }
+    #header-layout nav .auth-links ul {
+      margin: 20px;
+      display: flex; }
+      #header-layout nav .auth-links ul li {
+        display: flex;
+        justify-content: space-evenly;
+        margin-right: 10px; }
+    #header-layout nav a {
+      color: white;
+      text-decoration: none; }

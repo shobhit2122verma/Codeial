@@ -1,0 +1,21 @@
+#layout-footer {
+  color: white;
+  display: flex;
+  justify-content: flex-start;
+  background: grey; }
+  #layout-footer div {
+    padding: 5px 10px; }
+    #layout-footer div p {
+      margin: 20px;
+      font-size: 1rem;
+      font-weight: bold; }
+    #layout-footer div .footer-nav ul {
+      display: flex;
+      margin: 20px; }
+      #layout-footer div .footer-nav ul li {
+        display: flex;
+        justify-content: space-between;
+        margin-right: 10px; }
+  #layout-footer a {
+    color: white;
+    text-decoration: none; }

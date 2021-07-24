@@ -1,0 +1,29 @@
+#layout-footer{
+    color: white;
+    display: flex;
+    justify-content:flex-start;
+    background: grey;
+    div{
+        padding: 5px 10px;
+        p{
+            margin: 20px;
+            font-size: 1rem;
+            font-weight: bold;
+        }
+        .footer-nav{
+            ul{
+                display: flex;
+                margin :20px;
+                li{
+                    display: flex;
+                    justify-content: space-between;
+                    margin-right: 10px;
+                }
+            }
+        }
+    }
+    a{
+        color: white;
+        text-decoration: none;
+    }
+}

@@ -1,0 +1,34 @@
+#header-layout{
+
+    position:relative;
+    nav{
+        display: flex;
+        justify-content: space-between;
+        padding: 0px 10px;
+        background-color: rgb(27, 68, 146);
+        color: white;
+        box-shadow: 1px 1px 1px 1px lightgray;
+        .mini-logo{
+            p{
+                font-size: 1.4rem;
+                font-weight: bold;
+                margin: 20px;
+            }
+        }
+        .auth-links{
+            ul{
+                margin: 20px;
+                display: flex;
+                li{
+                    display: flex;
+                    justify-content: space-evenly;
+                    margin-right: 10px;
+                }
+            }
+        }
+        a{
+            color: white;
+            text-decoration: none;
+        }
+    }
+}
